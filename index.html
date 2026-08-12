@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ahn Ao Rueang | Book Recommendation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Arial", "Tahoma", sans-serif;
+            background: #f8f6f2;
+            color: #292929;
+            line-height: 1.7;
+        }
+
+        /* ================= COVER ================= */
+
+        .cover {
+            height: 360px;
+            background-image: url("cover.jpg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .cover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.05),
+                rgba(0,0,0,0.5)
+            );
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile {
+            max-width: 900px;
+            margin: -85px auto 0;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 7px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        h1 {
+            margin-top: 18px;
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .tagline {
+            color: #777;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+        }
+
+        .card h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #555;
+        }
+
+        /* ================= INTRO ================= */
+
+        .intro {
+            text-align: center;
+        }
+
+        .intro h2 {
+            font-size: 28px;
+        }
+
+        .intro p {
+            max-width: 720px;
+            margin: auto;
+        }
+
+        /* ================= BOOKS ================= */
+
+        .books {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .book {
+            background: #faf9f6;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .book:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        .book-content {
+            padding: 18px;
+        }
+
+        .book-content h3 {
+            font-size: 19px;
+            margin-bottom: 5px;
+        }
+
+        .author {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #e6a400;
+            margin-bottom: 8px;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .category {
+            background: #f1eee8;
+            padding: 9px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            background: #292929;
+            color: white;
+        }
+
+        /* ================= QUOTE ================= */
+
+        .quote {
+            text-align: center;
+            padding: 45px 30px;
+            background: #292929;
+            color: white;
+            border-radius: 24px;
+            margin-bottom: 25px;
+        }
+
+        .quote p {
+            font-size: 23px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .quote span {
+            display: block;
+            margin-top: 15px;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .facebook-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 13px 28px;
+            border-radius: 50px;
+            background: #1877f2;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .facebook-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(24,119,242,0.3);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .cover {
+                height: 230px;
+            }
+
+            .profile {
+                margin-top: -65px;
+            }
+
+            .logo {
+                width: 125px;
+                height: 125px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .books {
+                grid-template-columns: 1fr;
+            }
+
+            .book-cover {
+                height: 320px;
+            }
+
+            .quote p {
+                font-size: 19px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= COVER ================= -->
+
+    <div class="cover"></div>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <section class="profile">
+
+        <img
+            src="logo.jpg"
+            alt="Ahn Ao Rueang Logo"
+            class="logo"
+        >
+
+        <h1>Ahn Ao Rueang</h1>
+
+        <div class="tagline">
+            📚 หนังสือดี ๆ ที่อยากบอกต่อ
+        </div>
+
+    </section>
+
+
+    <main class="container">
+
+
+        <!-- ================= INTRO ================= -->
+
+        <section class="card intro">
+
+            <h2>📖 ยินดีต้อนรับสู่ Ahn Ao Rueang</h2>
+
+            <p>
+                พื้นที่สำหรับคนรักการอ่าน
+                ที่อยากค้นพบหนังสือดี ๆ และเรื่องราวใหม่ ๆ
+                เราคัดสรรหนังสือที่น่าสนใจมาแนะนำ
+                พร้อมรีวิวแบบเข้าใจง่าย
+                เพื่อช่วยให้คุณเลือกหนังสือเล่มต่อไปได้ง่ายขึ้น
+            </p>
+
+            <a
+                href="https://www.facebook.com/AhnAoRueang"
+                target="_blank"
+                class="facebook-btn"
+            >
+                🔵 ติดตามเพจ Facebook
+            </a>
+
+        </section>
+
+
+        <!-- ================= BOOK RECOMMENDATION ================= -->
+
+        <section class="card">
+
+            <h2>🌟 หนังสือแนะนำ</h2>
+
+            <p>
+                หนังสือที่น่าสนใจสำหรับการอ่านในช่วงเวลาต่าง ๆ
+            </p>
+
+
+            <div class="books">
+
+
+                <!-- BOOK 1 -->
+
+                <div class="book">
+
+                    <img
+                        src="book1.jpg"
+                        alt="หนังสือแนะนำเล่มที่ 1"
+                        class="book-cover"
+                    >
+
+                    <div class="book-content">
+
+                        <h3>Atomic Habits</h3>
+
+                        <div class="author">
+                            James Clear
+                        </div>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p>
+                            หนังสือที่จะช่วยให้เราเข้าใจ
+                            การสร้างนิสัยเล็ก ๆ
+                            และเปลี่ยนแปลงตัวเอง
+                            ให้ดีขึ้นในทุกวัน
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOOK 2 -->
+
+                <div class="book">
+
+                    <img
+                        src="book2.jpg"
+                        alt="หนังสือแนะนำเล่มที่ 2"
+                        class="book-cover"
+                    >
+
+                    <div class="book-content">
+
+                        <h3>The Psychology of Money</h3>
+
+                        <div class="author">
+                            Morgan Housel
+                        </div>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <p>
+                            เรียนรู้เรื่องเงิน
+                            ผ่านมุมมองด้านพฤติกรรม
+                            และความคิดของมนุษย์
+                            ที่มีต่อการเงิน
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOOK 3 -->
+
+                <div class="book">
+
+                    <img
+                        src="book3.jpg"
+                        alt="หนังสือแนะนำเล่มที่ 3"
+                        class="book-cover"
+                    >
+
+                    <div class="book-content">
+
+                        <h3>Ikigai</h3>
+
+                        <div class="author">
+                            Héctor García & Francesc Miralles
+                        </div>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐☆
+                        </div>
+
+                        <p>
+                            หนังสือที่ชวนให้ค้นหา
+                            ความหมายของชีวิต
+                            และสิ่งที่ทำให้เราอยากตื่นขึ้นมา
+                            ในทุก ๆ วัน
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORIES ================= -->
+
+        <section class="card">
+
+            <h2>📚 หมวดหนังสือที่น่าสนใจ</h2>
+
+            <div class="categories">
+
+                <div class="category">🌱 พัฒนาตัวเอง</div>
+
+                <div class="category">💰 การเงิน</div>
+
+                <div class="category">🧠 จิตวิทยา</div>
+
+                <div class="category">💼 ธุรกิจ</div>
+
+                <div class="category">❤️ ความสัมพันธ์</div>
+
+                <div class="category">✨ Lifestyle</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUOTE ================= -->
+
+        <section class="quote">
+
+            <p>
+                “หนังสือหนึ่งเล่มอาจเปลี่ยนมุมมองของเรา
+                และมุมมองใหม่อาจเปลี่ยนชีวิตเราได้”
+            </p>
+
+            <span>
+                — Ahn Ao Rueang 📖
+            </span>
+
+        </section>
+
+
+        <!-- ================= FOLLOW ================= -->
+
+        <section class="card intro">
+
+            <h2>💙 ชอบหนังสือเล่มไหน?</h2>
+
+            <p>
+                ติดตาม Ahn Ao Rueang
+                เพื่อพบกับหนังสือใหม่ ๆ
+                รีวิว และเรื่องราวที่น่าสนใจ
+                สำหรับคนรักการอ่าน
+            </p>
+
+            <a
+                href="https://www.facebook.com/AhnAoRueang"
+                target="_blank"
+                class="facebook-btn"
+            >
+                Follow Ahn Ao Rueang →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © 2026 Ahn Ao Rueang | Book Recommendation
+    </footer>
+
+</body>
+</html>
